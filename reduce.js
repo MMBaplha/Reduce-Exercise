@@ -48,8 +48,18 @@ Examples:
         {title: 'Instructor', name: 'Colt'}
        ]
 */
+const arr = [{ name: 'Elie' }, { name: 'Tim' }, { name: 'Matt' }, { name: 'Colt' }];
 
-function addKeyAndValue(arr, key, value) {}
+function addKeyAndValue(arr, key, value) {
+    return arr.reduce(function(accum, obj) {
+        obj[key] = value;
+        accum.push(obj);
+        return accum; 
+    }, []); 
+}
+
+const result = addKeyAndValue(arr, 'title', 'Instructor');
+console.log(result);
 
 /*
 Write a function called partition which accepts an array and a callback and returns an array with two arrays inside of it. The partition function should run the callback function on each value in the array and if the result of the callback function at that specific value is true, the value should be placed in the first subarray. If the result of the callback function at that specific value is false, the value should be placed in the second subarray. 
@@ -73,4 +83,13 @@ Examples:
     partition(names, isLongerThanThreeCharacters) // [['Elie', 'Colt', 'Matt'], ['Tim']]
 */
 
-function partition(arr, callback) {}
+function partition(arr, callback) {
+   return arr.reduce(function(accum, next){
+    if(callback(next)){
+        accum[0].push(next);
+    }else {
+        accum[1].push(next);
+    }
+    return accum;
+   }, [[],[]]);
+};
